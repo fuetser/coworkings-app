@@ -1,0 +1,214 @@
+{
+  "users": [
+    {
+      "id": "9b7c9d5f-9a03-4e27-a94e-7dd1d65df3d1",
+      "email": "user@example.com",
+      "password": "123456",
+      "name": "Demo User"
+    },
+    {
+      "id": "d1af4d20-80ac-48b2-9830-dc2998fbad21",
+      "email": "admin@example.com",
+      "password": "123456",
+      "name": "Admin User"
+    },
+    {
+      "id": "9c86e0c7-ee97-43d2-88ee-6d3996a46945",
+      "email": "smoke-419469808@example.com",
+      "password": "123456",
+      "name": "Smoke Test",
+      "phone": "+79990000000"
+    },
+    {
+      "id": "e1675917-76e7-43c2-a054-f235eac17ed8",
+      "email": "alex@mail.com",
+      "password": "123456",
+      "name": "sasha",
+      "phone": "89111111111"
+    }
+  ],
+  "loginAttempts": [
+    {
+      "id": "bdb09086-3664-42c5-a2c2-160cd44ee2b1",
+      "email": "test@mail.ru",
+      "createdAt": "2026-03-11T19:18:58.979Z"
+    },
+    {
+      "id": "48a3fc36-2f4b-4a0d-8a8c-dafdf20b9949",
+      "email": "test@mail.ru",
+      "createdAt": "2026-03-11T19:19:10.875Z"
+    },
+    {
+      "id": "e2911ea2-047c-428b-b8a1-8c7b39d4a389",
+      "email": "limit-1314825258@example.com",
+      "createdAt": "2026-03-20T17:25:51.498Z"
+    },
+    {
+      "id": "869225fa-5cfd-4dda-bb07-3568893af2f7",
+      "email": "limit-1314825258@example.com",
+      "createdAt": "2026-03-20T17:25:51.514Z"
+    },
+    {
+      "id": "604579ca-4dbd-41d9-83f7-c4cf5cc47908",
+      "email": "limit-1314825258@example.com",
+      "createdAt": "2026-03-20T17:25:51.517Z"
+    },
+    {
+      "id": "a0c7c7f6-7420-4a2b-9261-088052688e0d",
+      "email": "limit-1314825258@example.com",
+      "createdAt": "2026-03-20T17:25:51.522Z"
+    },
+    {
+      "id": "4c6589b9-175f-4c5f-b8b8-9d84f6edc685",
+      "email": "limit-1314825258@example.com",
+      "createdAt": "2026-03-20T17:25:51.527Z"
+    }
+  ],
+  "venues": [
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000001",
+      "name": "North Star Collective",
+      "address": "14 Nevsky Avenue, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9343,
+        "lon": 30.3351
+      },
+      "features": ["wifi", "coffee", "meeting-room", "phone-booth"],
+      "availableWorkplaces": 18,
+      "rooms": [
+        {
+          "id": "room-north-1",
+          "name": "Aurora Room",
+          "allowFullRoomBooking": true,
+          "features": ["tv", "whiteboard", "video-call"]
+        },
+        {
+          "id": "room-north-2",
+          "name": "Quiet Booth Cluster",
+          "allowFullRoomBooking": false,
+          "features": ["phone-booth", "acoustic-panels"]
+        }
+      ]
+    },
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000002",
+      "name": "Riverbank Hub",
+      "address": "8 Aptekarskaya Embankment, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9723,
+        "lon": 30.3175
+      },
+      "features": ["wifi", "coffee", "parking", "event-space"],
+      "availableWorkplaces": 24,
+      "rooms": [
+        {
+          "id": "room-river-1",
+          "name": "Workshop Hall",
+          "allowFullRoomBooking": true,
+          "features": ["projector", "speaker-system", "event-space"]
+        },
+        {
+          "id": "room-river-2",
+          "name": "Focus Room",
+          "allowFullRoomBooking": true,
+          "features": ["monitor", "whiteboard"]
+        }
+      ]
+    },
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000003",
+      "name": "Atlas Workroom",
+      "address": "27 Bolshoy Prospect, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9417,
+        "lon": 30.2677
+      },
+      "features": ["wifi", "meeting-room", "monitor", "phone-booth"],
+      "availableWorkplaces": 10,
+      "rooms": [
+        {
+          "id": "room-atlas-1",
+          "name": "Team Studio",
+          "allowFullRoomBooking": true,
+          "features": ["monitor", "whiteboard", "video-call"]
+        },
+        {
+          "id": "room-atlas-2",
+          "name": "Call Booths",
+          "allowFullRoomBooking": false,
+          "features": ["phone-booth"]
+        }
+      ]
+    },
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000004",
+      "name": "Loft 189",
+      "address": "189 Ligovsky Prospect, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9195,
+        "lon": 30.3486
+      },
+      "features": ["wifi", "coffee", "event-space", "standing-desks"],
+      "availableWorkplaces": 14,
+      "rooms": [
+        {
+          "id": "room-loft-1",
+          "name": "Community Hall",
+          "allowFullRoomBooking": true,
+          "features": ["event-space", "projector"]
+        }
+      ]
+    },
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000005",
+      "name": "Harbor Desk Club",
+      "address": "6 Galernaya Street, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9299,
+        "lon": 30.2893
+      },
+      "features": ["wifi", "parking", "meeting-room", "shower"],
+      "availableWorkplaces": 8,
+      "rooms": [
+        {
+          "id": "room-harbor-1",
+          "name": "Strategy Room",
+          "allowFullRoomBooking": true,
+          "features": ["whiteboard", "tv"]
+        }
+      ]
+    },
+    {
+      "id": "a9b8c7d6-1234-4321-9999-000000000006",
+      "name": "Garden Lane Cowork",
+      "address": "33 Moskovsky Avenue, Saint Petersburg",
+      "timezone": "Europe/Moscow",
+      "location": {
+        "lat": 59.9061,
+        "lon": 30.3178
+      },
+      "features": ["wifi", "coffee", "phone-booth", "monitor"],
+      "availableWorkplaces": 16,
+      "rooms": [
+        {
+          "id": "room-garden-1",
+          "name": "Hybrid Room",
+          "allowFullRoomBooking": true,
+          "features": ["monitor", "video-call"]
+        },
+        {
+          "id": "room-garden-2",
+          "name": "Quiet Pods",
+          "allowFullRoomBooking": false,
+          "features": ["phone-booth", "acoustic-panels"]
+        }
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
