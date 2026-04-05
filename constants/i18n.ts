@@ -1,4 +1,4 @@
-﻿export type AppLanguage = "en" | "ru";
+export type AppLanguage = "en" | "ru";
 
 type TranslationParams = Record<string, string | number>;
 type TranslationMap = Record<string, string>;
@@ -240,6 +240,7 @@ export const translations: Record<AppLanguage, TranslationMap> = {
     "room.duration": "Duration",
     "room.price": "Price",
     "room.scope": "Scope",
+    "room.tariffPeriod": "Active period",
     "room.noSeatsTitle": "No seats available",
     "room.noSeatsBody": "This room does not contain any seats yet.",
     "room.active": "Active",
@@ -657,6 +658,7 @@ export const translations: Record<AppLanguage, TranslationMap> = {
     "room.duration": "Длительность",
     "room.price": "Цена",
     "room.scope": "Область действия",
+    "room.tariffPeriod": "Период действия",
     "room.noSeatsTitle": "Нет доступных мест",
     "room.noSeatsBody": "В этой комнате пока нет мест.",
     "room.active": "Активно",

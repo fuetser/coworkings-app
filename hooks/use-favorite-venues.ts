@@ -66,6 +66,30 @@ function toggleFavoriteVenueInState(
   };
 }
 
+function mergeFavoriteVenueIntoState(
+  currentState: FavoriteState,
+  favoriteVenue: FavoriteVenue,
+): FavoriteState {
+  if (!favoriteVenue?.id) {
+    return currentState;
+  }
+
+  const favoriteVenueIds = currentState.favoriteVenueIds.includes(favoriteVenue.id)
+    ? currentState.favoriteVenueIds
+    : [...currentState.favoriteVenueIds, favoriteVenue.id];
+
+  const favoriteVenues = currentState.favoriteVenues.some((venue) => venue.id === favoriteVenue.id)
+    ? currentState.favoriteVenues.map((venue) =>
+        venue.id === favoriteVenue.id ? favoriteVenue : venue,
+      )
+    : [...currentState.favoriteVenues, favoriteVenue];
+
+  return {
+    favoriteVenueIds,
+    favoriteVenues,
+  };
+}
+
 export function FavoriteVenuesProvider({ children }: PropsWithChildren) {
   const { user } = useAuth();
   const userId = user?.id ?? null;
@@ -202,7 +226,16 @@ export function FavoriteVenuesProvider({ children }: PropsWithChildren) {
         if (shouldRemove) {
           await removeFavorite(venueId);
         } else {
-          await addFavorite(venueId);
+          const addedFavoriteVenue = await addFavorite(venueId);
+
+          if (addedFavoriteVenue?.id) {
+            applyFavoriteState(
+              mergeFavoriteVenueIntoState(latestFavoriteStateRef.current, addedFavoriteVenue),
+            );
+          } else {
+            const favorites = await fetchFavorites();
+            applyFavoriteState(buildFavoriteState(favorites));
+          }
         }
       } catch (nextError) {
         applyFavoriteState(previousState);

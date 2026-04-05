@@ -136,12 +136,19 @@ export type TariffScope = "global" | "venue" | "room" | "seat";
 
 export type Tariff = {
   id: string;
-  name: string;
-  description?: string | null;
+  venueId?: string | null;
+  roomId?: string | null;
+  seatId?: string | null;
+  billingUnit?: string | null;
   priceAmountCents: number;
   currency: string;
-  durationMinutes: number;
-  scope: TariffScope;
+  activeFrom?: string | null;
+  activeTo?: string | null;
+  archivedAt?: string | null;
+  name?: string | null;
+  description?: string | null;
+  durationMinutes?: number | null;
+  scope?: TariffScope | null;
   scopeId?: string | null;
   active?: boolean;
 };
@@ -349,4 +356,3 @@ export type PushDeviceRegistration = {
   platform?: string | null;
   createdAt?: string | null;
 };
-

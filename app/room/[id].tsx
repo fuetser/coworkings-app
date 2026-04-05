@@ -76,6 +76,72 @@ function formatCurrency(amountCents: number, currency: string, locale: string) {
   }).format(amountCents / 100);
 }
 
+function formatBillingUnit(value: string | null | undefined) {
+  if (!value) {
+    return null;
+  }
+
+  return value
+    .split(/[-_]/g)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function getTariffScopeLabel(tariff: Tariff) {
+  if (tariff.seatId) {
+    return "seat";
+  }
+
+  if (tariff.roomId) {
+    return "room";
+  }
+
+  if (tariff.venueId) {
+    return "venue";
+  }
+
+  return "global";
+}
+
+function formatTariffPeriod(
+  tariff: Tariff,
+  locale: string,
+  fallback: string,
+) {
+  if (!tariff.activeFrom && !tariff.activeTo) {
+    return fallback;
+  }
+
+  const formatter = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  const fromLabel = tariff.activeFrom
+    ? formatTariffDate(tariff.activeFrom, formatter)
+    : fallback;
+  const toLabel = tariff.activeTo
+    ? formatTariffDate(tariff.activeTo, formatter)
+    : fallback;
+
+  return `${fromLabel} - ${toLabel}`;
+}
+
+function formatTariffDate(
+  value: string,
+  formatter: Intl.DateTimeFormat,
+) {
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+
+  return formatter.format(parsed);
+}
+
 export default function RoomSeatsScreen() {
   const { colors, isDark } = useAppTheme();
   const { locale, t } = useI18n();
@@ -171,15 +237,19 @@ export default function RoomSeatsScreen() {
 
   const relevantTariffs = useMemo(() => {
     return tariffs.filter((tariff) => {
-      if (!tariff.active && tariff.active !== undefined) {
+      if (tariff.archivedAt) {
         return false;
       }
 
-      if (!tariff.scopeId) {
-        return tariff.scope === "global";
+      if (tariff.roomId) {
+        return tariff.roomId === roomId;
       }
 
-      return tariff.scopeId === roomId || tariff.scopeId === resolvedVenueId;
+      if (tariff.venueId) {
+        return tariff.venueId === resolvedVenueId;
+      }
+
+      return !tariff.seatId;
     });
   }, [resolvedVenueId, roomId, tariffs]);
 
@@ -464,17 +534,13 @@ export default function RoomSeatsScreen() {
                     <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 6 }}>
                       <Ticket size={16} color={colors.accentStrong} />
                       <Text style={{ fontFamily: "Inter", fontWeight: "700", fontSize: 16, color: colors.heading }}>
-                        {tariff.name}
+                        {formatBillingUnit(tariff.billingUnit) ?? t("room.notSpecified")}
                       </Text>
                     </View>
-                    {tariff.description ? (
-                      <Text style={{ fontFamily: "Inter", fontSize: 13, lineHeight: 20, color: colors.textMuted }}>
-                        {tariff.description}
-                      </Text>
-                    ) : null}
-                    <SummaryRow colors={colors} label={t("room.duration")} value={t("booking.minutes", { count: tariff.durationMinutes })} />
                     <SummaryRow colors={colors} label={t("room.price")} value={formatCurrency(tariff.priceAmountCents, tariff.currency, locale)} />
-                    <SummaryRow colors={colors} label={t("room.scope")} value={tariff.scope} />
+                    <SummaryRow colors={colors} label={t("room.duration")} value={formatBillingUnit(tariff.billingUnit) ?? t("room.notSpecified")} />
+                    <SummaryRow colors={colors} label={t("room.scope")} value={getTariffScopeLabel(tariff)} />
+                    <SummaryRow colors={colors} label={t("room.tariffPeriod")} value={formatTariffPeriod(tariff, locale, t("room.notSpecified"))} />
                   </Card>
                 ))}
               </View>
@@ -768,10 +834,3 @@ function ActionButton({
     </TouchableOpacity>
   );
 }
-
-
-
-
-
-
-

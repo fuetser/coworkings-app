@@ -108,7 +108,7 @@ export async function fetchFavorites() {
 
 export async function addFavorite(venueId: string) {
   try {
-    await post<FavoriteVenue | void>("/favorites", {
+    return await post<FavoriteVenue | void>("/favorites", {
       auth: true,
       body: { venueId },
       fallbackMessage: translate("service.favorites.updateFavorites"),

@@ -7,13 +7,14 @@
     "icon": "./assets/images/icon.png",
     "scheme": "coworkingsapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.petrovv.ivann.coworkingsapp"
     },
     "web": {
       "output": "static",

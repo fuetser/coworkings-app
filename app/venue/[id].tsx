@@ -158,14 +158,6 @@ export default function VenueDetailsScreen() {
         >
           {venue?.name ?? t("venue.detailsTitle")}
         </Text>
-        {venue ? (
-          <FavoriteVenueButton
-            disabled={isFavoritePending}
-            isFavorite={isFavorite}
-            isLoading={isFavoritePending}
-            onPress={handleToggleFavorite}
-          />
-        ) : null}
       </View>
 
       <ScrollView
