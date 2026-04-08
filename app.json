@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "coworkings-app",
+    "name": "Coworkings Finder",
     "slug": "coworkings-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "coworkingsapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -46,6 +46,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "97d0cb48-95ec-4a04-a431-88903f1de721"
+      }
     }
   }
 }
