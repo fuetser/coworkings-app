@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Coworkings Finder",
-    "slug": "coworkings-app",
+    "slug": "coworkings-finder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,11 @@
         "android.permission.SYSTEM_ALERT_WINDOW",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#1B1612"
+      }
     },
     "web": {
       "output": "static",

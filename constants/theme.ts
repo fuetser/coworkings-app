@@ -152,8 +152,7 @@ export function getTheme(mode: ThemeMode) {
 
 export function getNavigationTheme(mode: ThemeMode): NavigationTheme {
   const palette = getTheme(mode);
-  const base =
-    mode === "dark" ? NavigationDarkTheme : NavigationDefaultTheme;
+  const base = mode === "dark" ? NavigationDarkTheme : NavigationDefaultTheme;
 
   return {
     ...base,
