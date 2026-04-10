@@ -1,4 +1,5 @@
 import { FavoriteVenueButton } from "@/components/favorite-venue-button";
+import { getAdaptiveTabBarMetrics } from "@/constants/tab-bar";
 import { Radii } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import { useFavoriteVenues } from "@/hooks/use-favorite-venues";
@@ -11,17 +12,21 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  Platform,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
+  useWindowDimensions,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function BookScreen() {
   const { colors, isDark } = useAppTheme();
   const { t } = useI18n();
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const { isFavoriteVenueId, pendingVenueIds, toggleFavoriteVenueId } =
     useFavoriteVenues();
   const [venues, setVenues] = useState<VenueListItem[]>([]);
@@ -131,6 +136,12 @@ export default function BookScreen() {
     [t, toggleFavoriteVenueId],
   );
 
+  const tabBarMetrics = getAdaptiveTabBarMetrics({
+    bottomInset: insets.bottom,
+    platform: Platform.OS,
+    screenWidth: width,
+  });
+
   return (
     <SafeAreaView
       edges={["top"]}
@@ -237,7 +248,10 @@ export default function BookScreen() {
 
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 132 }}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: tabBarMetrics.contentPaddingBottom,
+        }}
         showsVerticalScrollIndicator={false}
       >
         {showFilters ? (

@@ -1,3 +1,4 @@
+import { getAdaptiveTabBarMetrics } from "@/constants/tab-bar";
 import { Radii } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import { useI18n } from "@/hooks/use-i18n";
@@ -13,13 +14,15 @@ import { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  Platform,
   RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
+  useWindowDimensions,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 const tabs: BookingListStatus[] = ["active", "past"];
 
@@ -58,6 +61,8 @@ const getEmptyStateMessage = (
 export default function BookingsScreen() {
   const { colors, isDark } = useAppTheme();
   const { locale, t } = useI18n();
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const [activeTab, setActiveTab] = useState<BookingListStatus>("active");
   const [bookings, setBookings] = useState<BookingListItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -130,6 +135,12 @@ export default function BookingsScreen() {
       },
     ]);
   };
+
+  const tabBarMetrics = getAdaptiveTabBarMetrics({
+    bottomInset: insets.bottom,
+    platform: Platform.OS,
+    screenWidth: width,
+  });
 
   return (
     <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: colors.background }}>
@@ -204,7 +215,7 @@ export default function BookingsScreen() {
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 16,
-          paddingBottom: 96,
+          paddingBottom: tabBarMetrics.contentPaddingBottom,
           flexGrow: 1,
         }}
         refreshControl={
