@@ -27,11 +27,14 @@ export function getAdaptiveTabBarMetrics({
   const isAndroid = platform === "android";
   const isCompactWidth = screenWidth < 380;
   const isVeryCompactWidth = screenWidth < 360;
+  const visualBottomGap = isAndroid
+    ? (isCompactWidth ? 8 : 10)
+    : (isCompactWidth ? 10 : 12);
 
   const horizontalInset = 0;
   const outerHorizontalMargin = 16;
   const height = isCompactWidth ? 64 : 68;
-  const bottomOffset = Math.max(bottomInset, isAndroid ? 12 : 16);
+  const bottomOffset = bottomInset + visualBottomGap;
   const paddingTop = isCompactWidth ? 5 : 6;
   const paddingBottom = isCompactWidth ? 13 : 14;
   const itemPaddingVertical = 0;
